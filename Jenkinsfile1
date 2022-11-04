@@ -5,16 +5,15 @@ pipeline{
     stages{
         stage("Git Checkout"){
             steps{
-                git credentialsId: 'Git_credintials', url: 'https://github.com/venkat1912/myweb.git'
+                git credentialsId: 'Git_credintials', url: 'https://github.com/venkat1912/hello-world.git'
             }
         }
         stage("Maven Build"){
             steps{
                 sh "mvn clean package"
-                sh "mv target/*.war target/myweb.war"
             }
         }
-        stage("deploy-dev"){
+        stage("deploy on tomcat"){
             steps{
                 sshagent(['tomcat-new']) {
                 sh """
